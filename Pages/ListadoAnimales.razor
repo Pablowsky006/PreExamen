@@ -1,0 +1,30 @@
+﻿@page "/listado"
+@inject AnimalService AnimalService
+@using PreExamen.Models
+
+<ul>
+    @foreach (var animal in AnimalService.Animales)
+    {
+        <li>
+            <strong>@animal.NombrePropio</strong> - @animal.Especie (@animal.GetType().Name)<br />
+            Tipo de alimentación: @animal.TipoAlimentacion, Vida máxima: @animal.TiempoMaximoVida años
+
+            @if (animal is Ave ave)
+            {
+                <div>Vuela: @(ave.Vuela ? "Sí" : "No"), Incubación: @ave.PeriodoIncubacion días</div>
+            }
+            else if (animal is Serpiente serpiente)
+            {
+                <div>Venenosa: @(serpiente.EsVenenosa ? "Sí" : "No"), Longitud máxima: @serpiente.LongitudMaxima m</div>
+            }
+        </li>
+    }
+</ul>
+
+
+
+<h3>ListadoAnimales</h3>
+
+@code {
+
+}

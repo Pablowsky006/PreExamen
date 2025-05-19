@@ -1,0 +1,56 @@
+﻿@page "/agregar"
+@inject AnimalService AnimalService
+@using PreExamen.Models
+
+
+
+
+
+<h3>AgregarAnimal</h3>
+
+<select @bind="tipoAnimal">
+    <option value="ave">Ave</option>
+    <option value="serpiente">Serpiente</option>
+</select>
+
+
+@if (tipoAnimal == "ave")
+{
+    <h4>Formulario Ave</h4>
+    <input placeholder="Nombre Propio" @bind="ave.NombrePropio" />
+    <input placeholder="Especie" @bind="ave.Especie" />
+    <input placeholder="Tipo de Alimentación" @bind="ave.TipoAlimentacion" />
+    <input type="number" placeholder="Tiempo máximo de vida" @bind="ave.TiempoMaximoVida" />
+    <label><input type="checkbox" @bind="ave.Vuela" /> ¿Vuela?</label>
+    <input type="number" placeholder="Período de incubación (días)" @bind="ave.PeriodoIncubacion" />
+    <button @onclick="AgregarAve">Agregar</button>
+}
+else if (tipoAnimal == "serpiente")
+{
+    <h4>Formulario Serpiente</h4>
+    <input placeholder="Nombre Propio" @bind="serpiente.NombrePropio" />
+    <input placeholder="Especie" @bind="serpiente.Especie" />
+    <input placeholder="Tipo de Alimentación" @bind="serpiente.TipoAlimentacion" />
+    <input type="number" placeholder="Tiempo máximo de vida" @bind="serpiente.TiempoMaximoVida" />
+    <label><input type="checkbox" @bind="serpiente.EsVenenosa" /> ¿Es venenosa?</label>
+    <input type="number" placeholder="Longitud máxima (m)" @bind="serpiente.LongitudMaxima" />
+    <button @onclick="AgregarSerpiente">Agregar</button>
+}
+
+@code {
+    private string tipoAnimal = "ave";
+    private Ave ave = new();
+    private Serpiente serpiente = new();
+
+    private void AgregarAve()
+    {
+        AnimalService.AgregarAnimal(ave);
+        ave = new();
+    }
+
+    private void AgregarSerpiente()
+    {
+        AnimalService.AgregarAnimal(serpiente);
+        serpiente = new();
+    }
+}

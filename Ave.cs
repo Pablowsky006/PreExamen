@@ -1,4 +1,4 @@
-﻿namespace PreExamen
+﻿namespace PreExamen.Models
 {
     public class Ave: Animal
     {
